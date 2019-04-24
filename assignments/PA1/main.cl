@@ -1,8 +1,10 @@
+-- abstract class of stack.
 Class Stack inherits IO { 
 	car() : String { { abort(); new String; } };
 
 	cdr() : Stack { { abort(); new Stack; } };
 
+  -- only for checking errors, since we do not consider invalid input, it is not used.
 	isNil() : Bool { { abort(); true; } };
 
 	cons(hd : String) : Cons {
@@ -16,6 +18,7 @@ Class Stack inherits IO {
 	print_stack() : Object { abort() };
 };
 
+-- empty stack.
 Class Nil inherits Stack {
 	isNil() : Bool { true };
 
@@ -26,6 +29,7 @@ Class Nil inherits Stack {
 	print_stack() : Object { true };
 };
 
+-- stack with top xcar and rest of stack xcdr.
 Class Cons inherits Stack {
 	xcar : String;
 	xcdr : Stack;
@@ -74,7 +78,7 @@ Class Cons inherits Stack {
 
 class Main inherits IO {
   stack : Stack <- new Nil;
-  terminate : Bool <- false;
+  terminate : Bool <- false; -- for gracefully exit
 
   prompt() : String {
     {
